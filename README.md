@@ -6,7 +6,7 @@ CRISPR-Pred is a machine learning tool designed to predict CRISPR-Cas9 off-targe
 
 ## 🚀 Getting Started
 ### Running in the Cloud
-The easiest way to use this project is via Google Colab. [Paste your Colab link here].
+The easiest way to use this project is via Google Colab. https://colab.research.google.com/drive/1ZmTXzqCCkvNI4x2dwjKT4p9o1Di9fupg#scrollTo=0S0sptnQi-eD
 
 ### Local Installation
 1. Clone the repo:
