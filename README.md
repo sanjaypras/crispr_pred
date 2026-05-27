@@ -8,3 +8,4 @@ CRISPR-Pred is a tool designed to predict CRISPR-Cas9 off-target effects and cle
 1. Clone the repo:
    ```bash
    git clone [https://github.com/sanjaypras/crispr_pred.git](https://github.com/sanjaypras/crispr_pred.git)
+pip install -r requirements.txt
