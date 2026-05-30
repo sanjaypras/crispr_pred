@@ -17,11 +17,11 @@ The easiest way to use this project is via Google Colab. https://colab.research.
 ## log
 
 ### v1:
-started, xgb, linear reg, neural netwrok
-xgb was the best - spearman corr of 0.57
-need to tune nn
+started, xgb, linear reg, neural netwrok   
+xgb was the best - spearman corr of 0.57   
+need to tune nn   
 
 ### v2
-tried to tune nn
-tried diff optimizers, adamw is getting there but still cant hit 0.57
-try again later to see what i can tune
+tried to tune nn   
+tried diff optimizers, adamw is getting there but still cant hit 0.57   
+try again later to see what i can tune   
