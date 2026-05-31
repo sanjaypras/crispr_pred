@@ -14,14 +14,16 @@ The easiest way to use this project is via Google Colab. https://colab.research.
    git clone [https://github.com/sanjaypras/crispr_pred.git](https://github.com/sanjaypras/crispr_pred.git)
 
 
-## log
+## Development Log
 
-### v1:
-started, xgb, linear reg, neural netwrok   
-xgb was the best - spearman corr of 0.57   
-need to tune nn   
+### Iteration 1: Model Baseline Comparison
+* **Objective:** Establish baseline performance across multiple architectures.
+* **Models Tested:** XGBoost, Linear Regression, and Multi-Layer Perceptron (Neural Network).
+* **Key Findings:** XGBoost outperformed other models with a **Spearman Correlation of 0.57**.
+* **Next Steps:** Investigate Neural Network architecture to close the performance gap.
 
-### v2
-tried to tune nn   
-tried diff optimizers, adamw is getting there but still cant hit 0.57   
-try again later to see what i can tune   
+### Iteration 2: Neural Network Optimization
+* **Objective:** Hyperparameter tuning of the Neural Network to exceed baseline XGBoost performance.
+* **Experiments:** Tested various optimizers (SGD, Adam, AdamW, RMSprop, Adagrad).
+* **Results:** AdamW showed the most promise in convergence stability(it was consistently hitting 0.5), though performance currently remains below the 0.57 threshold.
+* **Next Steps:** Explore alternative activation functions, dropout rates, and learning rate scheduling.
