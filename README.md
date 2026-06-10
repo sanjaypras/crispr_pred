@@ -20,7 +20,7 @@ The goal of this project is to successfully predict the outcome of a CRISPR-Cas9
 * **Activity:** Activity remaining in the sample after cut, a lot of activity is good, and means the cut preserved the life of the sample.
 * **Percent Rank[target variable]:** Activity ranked from 0-1, higher the better.
 
-**Preprocessing:** To prepare the data, we dropped `Spacer Sequence` (we already had a longer version of this feature), `Transcript` & `Annotation` (dropped to focus on sequence-specific predictors) and `Nucleotide cut position` & `Amino Acid Cut position` (already explained in `Percent Peptide`). Also, since we had a ~30 character sequence of DNA, we one-hot encoded each character so we had ~120 different binary columns representing each DNA sequence. Train set was 80%, and test set was 20% of the data.
+**Preprocessing:** To prepare the data, we dropped `Spacer Sequence` (we already had a longer version of this feature). Also, since we had a ~30 character sequence of DNA, we one-hot encoded each character so we had ~120 different binary columns representing each DNA sequence. We also one-hot encoded `Transcript` &  `Annotation`. Train set was 80%, and test set was 20% of the data.
 
 ### **Model / approach**
 For regression, we tried to predict a cut's `Percent Rank` based on their features (e.g., `Percent Peptide`, `Strand`, `Gene Symbol`, etc.)
@@ -36,17 +36,16 @@ For regression, we tried to predict a cut's `Percent Rank` based on their featur
 ### **Results**
 | Model | Spearman Score |
 | :--- | :--- |
-| Linear Regression | ~0.42 |
+| Linear Regression | ~0.44 |
 | Neural Network | 0.55 |
-| **XGBoost** | **0.575** |
+| **XGBoost** | **0.68** |
 
 We next wanted to look at feature importance. We used SHAP analysis for this, and we used it on the XGBoost model since that had the best performance. The most important feature was `Percent Peptide`, which we could tell by looking at the beeswarm plot, and after that, none of the others were standout, but they all contributed more or less equally. Next, we looked at the waterfall plots for individual examples. `Percent Peptide` was consistently in the top 3, but otherwise, nothing really stood out.
 
 ### **What worked / what didn't**
-With the XGBoost model achieving a Spearman correlation of 0.575, closely approaching the benchmark of 0.60, the model was overall successful. Linear Regression showed the data had a weak to moderate correlation, meaning there was definitely room to improve. XGBoost was much better and almost at the 0.6 threshold. The Neural Network was a little bit of a letdown since it decreased from XGB. The better performance of XGBoost over the Neural Network (0.575 vs 0.55) shows that the dataset is better for decision trees. The NN probably struggled to find a clear correlation with only ~2,000 samples. The clean nature of the dataset allowed for a smooth pipeline and there were no outliers in the data or in the prediction phases, which was very helpful for the data preparation. 
+With the XGBoost model achieving a Spearman correlation of 0.682, exceeding the benchmark of 0.60, the model was overall very successful. Linear Regression showed the data had a weak to moderate correlation, meaning there was definitely room to improve. XGBoost was a lot better passed the 0.6 threshold. The Neural Network was a little bit of a letdown since it decreased from XGB. The better performance of XGBoost over the Neural Network (0.68 vs 0.55) shows that the dataset is better for decision trees. The NN probably struggled to find a clear correlation with only ~2,000 samples. The clean nature of the dataset allowed for a smooth pipeline and there were no outliers in the data or in the prediction phases, which was very helpful for the data preparation. 
 
-**Overall thoughts:** `Percent Peptide` is the most important feature; it showed for XGB how much it helps predict `Percent Rank` through feature importance. I felt like there was still a way to hit 0.6, as it had been done before, we need to try a different model, or maybe tweak the XGB a little bit more. 
+**Overall thoughts:** `Percent Peptide` is the most important feature; it showed for XGB how much it helps predict `Percent Rank` through feature importance. I was very happy that we succeeded in passing the 0.6 mark, but I feel like we should be able to get the NN to hit 0.6. 
 
 ### **Next steps**
-* To hopefully increase the Spearman metric, we could possibly include the other columns.
-* Tweak the XGB a little bit more to improve the model and hit the 0.6 threshold.
+* Tune the NN more, maybe changing the optimizer, to hit that 0.6 that the XGB acheived.
